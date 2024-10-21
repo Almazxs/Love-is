@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love is Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        img {
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Love is Generator</h1>
+    <button id="generateBtn">Получить Love is</button>
+    <p id="result"></p>
+    <img id="loveImage" src="" alt="Love is Image" style="display:none;">
+
+    <script>
+        let numbers = Array.from({length: 50}, (_, i) => i + 1);  // Массив с числами от 1 до 50
+        let usedNumbers = [];  // Список использованных номеров
+
+        document.getElementById('generateBtn').addEventListener('click', () => {
+            if (numbers.length === 0) {
+                document.getElementById('result').innerText = "Все номера уже использованы!";
+                document.getElementById('loveImage').style.display = "none";
+                return;
+            }
+
+            // Выбираем случайный номер
+            let randomIndex = Math.floor(Math.random() * numbers.length);
+            let uniqueNumber = numbers[randomIndex];
+
+            // Удаляем выбранный номер из списка
+            usedNumbers.push(uniqueNumber);
+            numbers.splice(randomIndex, 1);
+
+            // Отображаем текст и изображение
+            document.getElementById('result').innerText = "Ваш номер Love is: " + uniqueNumber;
+            document.getElementById('loveImage').src = `love${uniqueNumber}.jpg`;
+            document.getElementById('loveImage').style.display = "block";
+        });
+    </script>
+</body>
+</html>
